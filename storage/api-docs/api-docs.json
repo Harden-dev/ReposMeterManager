@@ -1,0 +1,1036 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Meter API",
+        "version": "1.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur local"
+        },
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur local"
+        },
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur local"
+        },
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur local"
+        },
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur local"
+        },
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur local"
+        },
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur local"
+        }
+    ],
+    "paths": {
+        "/api/compteurs/user/{id}": {
+            "get": {
+                "tags": [
+                    "Compteurs"
+                ],
+                "summary": "Obtenir les compteurs d'un utilisateur",
+                "operationId": "2b47c7f818771345464f73d7c3848129",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des compteurs lié a un utilisateur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "Compteur"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/compteurs/new": {
+            "post": {
+                "tags": [
+                    "Compteurs"
+                ],
+                "summary": "Ajoute un nouveau compteur",
+                "operationId": "f325b31125d0f9cab2644d1488e81510",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nummero_compteur",
+                                    "localisation",
+                                    "type_local",
+                                    "frequence_moy_rechargement",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "nummero_compteur": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    },
+                                    "localisation": {
+                                        "type": "string",
+                                        "example": "123 Rue Example"
+                                    },
+                                    "type_local": {
+                                        "type": "string",
+                                        "example": "Appartement"
+                                    },
+                                    "frequence_moy_rechargement": {
+                                        "type": "integer",
+                                        "example": 30
+                                    },
+                                    "montant_moy_rechargement": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 50.5
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Compteur créé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "succès"
+                                        },
+                                        "data": {
+                                            "$ref": "schemas/Compteur"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Erreur de validation"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/compteurs/update/{id}": {
+            "put": {
+                "tags": [
+                    "Compteurs"
+                ],
+                "summary": "Met à jour un compteur existant",
+                "operationId": "0a7cf705f9a357239d453b3656e756bd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du compteur à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "numero_compteur": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    },
+                                    "localisation": {
+                                        "type": "string",
+                                        "example": "123 Rue Example"
+                                    },
+                                    "type_local": {
+                                        "type": "string",
+                                        "example": "Appartement"
+                                    },
+                                    "frequence_moy_rechargement": {
+                                        "type": "integer",
+                                        "example": 30
+                                    },
+                                    "montant_moy_rechargement": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 50.5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Compteur mis à jour avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Mise à jour réussie"
+                                        },
+                                        "data": {
+                                            "$ref": "schemas/Compteur"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Erreur de validation"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Compteur non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Compteur non trouvé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/equipements/user/{id}/compteur/{id}": {
+            "get": {
+                "tags": [
+                    "Equipements"
+                ],
+                "summary": "Obtenir les equipements d'un utilisateur",
+                "operationId": "26c316fcac7a89d1c030c2f38b09b0b0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des equipements lié a un utilisateur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "schemas/Equipement"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/equipements/show/{id}": {
+            "get": {
+                "tags": [
+                    "Equipements"
+                ],
+                "summary": "Afficher les détails d'un équipement",
+                "operationId": "836564cc29fa54c3b587b090877d381d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'équipement à afficher",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de l'équipement",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "schemas/Equipement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Équipement non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Cet équipement ne figure pas dans notre base de données"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/equipements/new": {
+            "post": {
+                "tags": [
+                    "Equipements"
+                ],
+                "summary": "Enregistrer un nouvel équipement",
+                "operationId": "e8a0acc3f994d8f186f261d0041aa6b7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nom_appareil",
+                                    "puissance",
+                                    "compteur_id"
+                                ],
+                                "properties": {
+                                    "nom_appareil": {
+                                        "type": "string",
+                                        "example": "Réfrigérateur"
+                                    },
+                                    "puissance": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 1200.5
+                                    },
+                                    "compteur_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Équipement enregistré avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Succès"
+                                        },
+                                        "data": {
+                                            "$ref": "schemas/Equipement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Erreur lors de l'enregistrement de votre équipement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/equipements/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Equipements"
+                ],
+                "summary": "Afficher le formulaire d'édition d'un équipement",
+                "operationId": "84bde844fa87e722a15ffede62549974",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'équipement à éditer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Formulaire d'édition de l'équipement",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "schemas/Equipement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Équipement non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Équipement non trouvé dans notre base de données"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/equipements/update{id}": {
+            "put": {
+                "tags": [
+                    "Equipements"
+                ],
+                "summary": "Modifier un équipement",
+                "operationId": "f0e65c34511b282a702d0981c541616b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'équipement à modifier",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom_appareil": {
+                                        "type": "string",
+                                        "example": "Nouveau nom de l'appareil"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Équipement modifié avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Votre équipement a été modifié avec succès"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Équipement non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "L'équipement est introuvable"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/equipements/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Equipements"
+                ],
+                "summary": "Supprimer un équipement",
+                "operationId": "d0744ea142ec1dcecf0fb70a2799ba33",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'équipement à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Équipement supprimé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "Équipement supprimé avec succès"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Équipement non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Votre équipement est introuvable"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/send-reset-link": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Envoyer le lien de réinitialisation de mot de passe",
+                "operationId": "ef0a83b82ae18da707301f9b92b024a9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lien de réinitialisation envoyé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Password reset link sent to your email."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Erreur de validation"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Aucun utilisateur trouvé."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rechargements/user/{id}": {
+            "get": {
+                "tags": [
+                    "Rechargements"
+                ],
+                "summary": "Obtenir les rechargements d'un utilisateur",
+                "operationId": "8029d215b0db452194ca19986523337a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des rechargements lié a un utilisateur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "schemas/Rechargement"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/rechargements/new": {
+            "post": {
+                "tags": [
+                    "Rechargements"
+                ],
+                "summary": "Créer un nouveau rechargement",
+                "operationId": "52a54e0b23d2d81b53d4bf6c490129a4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "valeur_energ_dispo",
+                                    "valeur_energ_acheter",
+                                    "montant_recharge",
+                                    "date_rechargement",
+                                    "heure_rechargement",
+                                    "compteur_id",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "valeur_energ_dispo": {
+                                        "type": "number",
+                                        "example": 100
+                                    },
+                                    "valeur_energ_acheter": {
+                                        "type": "number",
+                                        "example": 50
+                                    },
+                                    "montant_recharge": {
+                                        "type": "number",
+                                        "example": 20
+                                    },
+                                    "date_rechargement": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-01-01"
+                                    },
+                                    "heure_rechargement": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "12:00:00"
+                                    },
+                                    "compteur_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Rechargement créé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "succès"
+                                        },
+                                        "data": {
+                                            "$ref": "schemas/Rechargement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation échouée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Erreur de validation"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/releves/compteurs/{id}": {
+            "get": {
+                "tags": [
+                    "Relevés"
+                ],
+                "summary": "Obtenir les releves d'un compteurs",
+                "operationId": "17c144409e1d4528b99d6ce12820e8d2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du compteur",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des releves lié a un compteur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "schemas/Releve"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "compteur non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/releves": {
+            "post": {
+                "tags": [
+                    "Relevés"
+                ],
+                "summary": "Créer un nouveau relevé",
+                "operationId": "5d4aa86dfaf2d0033b4919f860bc2fa5",
+                "requestBody": {
+                    "description": "Données requises pour créer un nouveau relevé",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "valeur_energ_dispo",
+                                    "date_releve",
+                                    "heure_releve",
+                                    "compteur_id"
+                                ],
+                                "properties": {
+                                    "valeur_energ_dispo": {
+                                        "type": "string",
+                                        "example": "100 kWh"
+                                    },
+                                    "date_releve": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-06-18"
+                                    },
+                                    "heure_releve": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "13:30:00"
+                                    },
+                                    "compteur_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Relevé créé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "succès"
+                                        },
+                                        "data": {
+                                            "$ref": "schemas/Releve"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Erreur lors de la création du relevé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reset": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Réinitialisation du mot de passe",
+                "operationId": "9464bf704850843247097d9076e43ea5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "token"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "newpassword"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "newpassword"
+                                    },
+                                    "token": {
+                                        "type": "string",
+                                        "example": "token_from_email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mot de passe réinitialisé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Le mot de passe a été réinitialisé avec succès !"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de réinitialisation de mot de passe",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Message d'erreur détaillé"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
