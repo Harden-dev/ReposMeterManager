@@ -126,7 +126,7 @@ class CompteurController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nummero_compteur' => ['required', 'unique:compteurs'],
+            'numero_compteur' => ['required', 'unique:compteurs'],
             'localisation' => 'required',
             'type_local' => 'required',
             'frequence_moy_rechargement' => 'required',
@@ -138,7 +138,7 @@ class CompteurController extends Controller
         try {
             $compteurs = new Compteur(
                 [
-                    'nummero_compteur' => Request('nummero_compteur'),
+                    'numero_compteur' => Request('numero_compteur'),
                     'localisation' => Request('localisation'),
                     'type_local' => Request('type_local'),
                     'frequence_moy_rechargement' => Request('frequence_moy_rechargement'),

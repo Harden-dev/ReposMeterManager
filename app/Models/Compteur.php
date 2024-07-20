@@ -13,7 +13,7 @@ class Compteur extends Model
 
     protected $fillable =
         [
-        'nummero_compteur',
+        'numero_compteur',
         'localisation',
         'type_local',
         'frequence_moy_rechargement',
