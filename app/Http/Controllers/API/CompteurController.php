@@ -49,7 +49,7 @@ class CompteurController extends Controller
      *         name="id",
      *         in="path",
      *         required=true,
-     *         @OA\Schema(type="integer"),
+     *         @OA\Schema(type="string"),
      *         description="ID de l'utilisateur"
      *     ),
      *     @OA\Response(
