@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Compteur;
 use App\Models\Releve;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
@@ -67,16 +66,14 @@ class ReleveController extends Controller
      * )
      */
 
-    public function index($userId, $compteurId)
+    public function index($compteurId)
     {
-        // Récupérer l'utilisateur et le compteur
-        $user = User::findOrFail($userId);
         $compteur = Compteur::findOrFail($compteurId);
 
-        // Récupérer les équipements associés à l'utilisateur et au compteur
-        $releves = $user->releves()->where('compteur_id', $compteurId)->get();
+        // Récupérer les relevés associés au compteur
+        $releves = $compteur->releves;
 
-        // Retourner les équipements en tant que JSON
+        // Retourner les relevés en tant que JSON
         return response()->json($releves);
     }
 

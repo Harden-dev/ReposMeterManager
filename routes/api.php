@@ -48,6 +48,6 @@ Route::middleware(['auth:api'])->group(function () {
     // route pour les releves
 
     Route::post('/releves/new', [ReleveController::class, 'store']);
-    Route::get('/releves/utilisateurs/{userId}/compteurs/{compteurId}', [ReleveController::class, 'index']);
+    Route::get('/releves/compteurs/{id}', [ReleveController::class, 'index']);
 
 });
