@@ -118,7 +118,7 @@ class ReleveController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "valeur_energ_dispo" => "required",
+            "valeur_dispo_compteur" => "required",
             "date_releve" => "required",
             "heure_releve" => "required",
             "compteur_id" => "required",
@@ -126,7 +126,7 @@ class ReleveController extends Controller
         ]);
         try {
             $releves = new Releve([
-                "valeur_energ_dispo" => Request('valeur_energ_dispo'),
+                "valeur_dispo_compteur" => Request('valeur_dispo_compteur'),
                 "date_releve" => Request('date_releve'),
                 "heure_releve" => Request('heure_releve'),
                 "compteur_id" => Request('compteur_id'),
