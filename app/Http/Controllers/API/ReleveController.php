@@ -122,6 +122,7 @@ class ReleveController extends Controller
             "date_releve" => "required",
             "heure_releve" => "required",
             "compteur_id" => "required",
+            "user_id" => "user_id",
         ]);
         try {
             $releves = new Releve([
@@ -129,6 +130,7 @@ class ReleveController extends Controller
                 "date_releve" => Request('date_releve'),
                 "heure_releve" => Request('heure_releve'),
                 "compteur_id" => Request('compteur_id'),
+                "user_id" => Request('user_id'),
 
             ]);
             $releves->save();
