@@ -131,7 +131,7 @@ class CompteurController extends Controller
             'type_local' => 'required',
             'frequence_moy_rechargement' => 'required',
             'montant_moy_rechargement',
-            'user_id' => 'required',
+            
 
         ]);
 
@@ -223,8 +223,13 @@ class CompteurController extends Controller
         $compteurs->frequence_moy_rechargement = $request->input('frequence_moy_rechargement');
 
         $compteurs->montant_moy_rechargement = $request->input('montant_moy_rechargement');
-
-        $compteurs->save();
+        try {
+            $compteurs->save();
+            return response()->json(["success"=>"la mise a jour a été effectué", 201]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+       
     }
     // fonction pour récupérer les compteurs lié à l'utilisateur
 

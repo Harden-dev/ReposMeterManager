@@ -29,7 +29,13 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::post('/compteurs/new', [CompteurController::class, 'store']);
     Route::get('/compteurs/user/{id}', [CompteurController::class, 'index']);
-    Route::get('/compteurs/update/{id}', [CompteurController::class, 'update']);
+    Route::put('/compteurs/update/{id}', [CompteurController::class, 'update']);
+    // Route::put('/compteurs/maj/{id}', [CompteurController::class, 'update']);
+
+    Route::put('/test', function() {
+        return 'Route works!';
+    });
+    
 
     // route les rechargements
 
